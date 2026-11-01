@@ -1,0 +1,59 @@
+
+/* ========================================
+   SHIRITORU - FONT SYSTEM
+======================================== */
+
+:root {
+  --font-display: "新ゴ B";
+  --font-heading: "ゴシックMB101 B";
+  --font-body: "TBUDゴシック R";
+  --font-emphasis: "TBUDゴシック E";
+  --font-caption: "リュウミン R-KL";
+  --font-en: "Inter", Arial, sans-serif;
+}
+
+/* Base */
+body {
+  font-family: var(--font-body), "メイリオ", sans-serif;
+}
+
+/* Main title */
+h1 {
+  font-family: var(--font-display), sans-serif;
+}
+
+/* Section headings */
+h2, h3 {
+  font-family: var(--font-heading), sans-serif;
+}
+
+/* Body text */
+p, li {
+  font-family: var(--font-body), sans-serif;
+}
+
+/* Emphasis */
+strong, b {
+  font-family: var(--font-emphasis), sans-serif;
+}
+
+/* English and numbers */
+.en,
+.number {
+  font-family: var(--font-en), Arial, sans-serif;
+}
+
+/* Photography captions */
+.caption {
+  font-family: var(--font-caption), serif;
+}
+
+/* Navigation */
+nav {
+  font-family: var(--font-body), sans-serif;
+}
+
+/* Footer */
+footer {
+  font-family: var(--font-body), sans-serif;
+}
