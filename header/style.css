@@ -1,0 +1,305 @@
+
+/* ========================================
+   01. カラーパレット
+======================================== */
+
+:root {
+  --header-bg: #ffffff;
+  --header-text: #222222;
+  --header-subtext: #555555;
+
+  --header-border: #dcdcdc;
+
+  --header-hover: #f2f2f2;
+  --header-active: #eeeeee;
+
+  --header-accent: #222222;
+}
+
+
+/* ========================================
+   02. ヘッダー全体
+======================================== */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  min-height: 84px;
+
+  padding: 0 36px;
+  box-sizing: border-box;
+
+  background: var(--header-bg);
+
+  /* ヘッダー下部の横線 */
+  border-bottom: 1px solid var(--header-border);
+}
+
+
+/* ========================================
+   03. サイトタイトル
+======================================== */
+
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-title {
+  margin: 0;
+  padding: 0;
+
+  color: var(--header-text);
+
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.025em;
+
+  white-space: nowrap;
+}
+
+
+/* ========================================
+   04. ナビゲーション全体
+======================================== */
+
+.site-navigation {
+  display: flex;
+  align-items: center;
+}
+
+.dads-horizontal-menu {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  list-style: none;
+
+  color: var(--header-subtext);
+
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   05. メニュー項目
+======================================== */
+
+.dads-horizontal-menu__item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+
+/* メニューリンク */
+
+.dads-horizontal-menu__item-inner,
+.dads-horizontal-menu__item-inner:any-link {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 0 19px;
+
+  box-sizing: border-box;
+
+  border-radius: 5px;
+
+  background: transparent;
+  color: var(--header-subtext);
+
+  font: inherit;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+
+/* ========================================
+   06. ホバーエフェクト
+======================================== */
+
+@media (hover: hover) {
+
+  .dads-horizontal-menu__item-inner:hover {
+    background: var(--header-hover);
+    color: var(--header-text);
+  }
+
+  .dads-horizontal-menu__item-inner:hover::after {
+    position: absolute;
+
+    right: 18px;
+    bottom: 4px;
+    left: 18px;
+
+    border-bottom: 2px solid var(--header-accent);
+
+    content: "";
+  }
+
+}
+
+
+/* ========================================
+   07. 現在のページ
+======================================== */
+
+.dads-horizontal-menu__item-inner[aria-current="page"] {
+  background: var(--header-active);
+  color: #111111;
+
+  font-weight: 700;
+}
+
+
+/* 選択中の下線 */
+
+.dads-horizontal-menu__item-inner[aria-current="page"]::after {
+  position: absolute;
+
+  right: 18px;
+  bottom: 4px;
+  left: 18px;
+
+  border-bottom: 3px solid var(--header-accent);
+  border-radius: 3px;
+
+  content: "";
+}
+
+
+/* ========================================
+   08. キーボードフォーカス
+======================================== */
+
+.dads-horizontal-menu__item-inner:focus-visible {
+  outline: 3px solid #222222;
+  outline-offset: 3px;
+
+  background: #eeeeee;
+}
+
+
+/* ========================================
+   09. アイコン
+======================================== */
+
+.dads-horizontal-menu__front-icon {
+  flex-shrink: 0;
+
+  width: 22px;
+  height: 22px;
+}
+
+.dads-horizontal-menu__chevron {
+  flex-shrink: 0;
+
+  width: 16px;
+  height: 16px;
+
+  transition: transform 0.2s ease;
+}
+
+.dads-horizontal-menu__item-inner[aria-expanded="true"]
+.dads-horizontal-menu__chevron {
+  transform: rotate(180deg);
+}
+
+
+/* ========================================
+   10. スマートフォン対応
+======================================== */
+
+@media screen and (max-width: 850px) {
+
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 18px 20px;
+  }
+
+  .site-title {
+    font-size: 19px;
+  }
+
+  .site-navigation {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .dads-horizontal-menu {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .dads-horizontal-menu__item-inner,
+  .dads-horizontal-menu__item-inner:any-link {
+    min-height: 46px;
+    padding: 0 15px;
+
+    white-space: nowrap;
+  }
+
+}
+
+
+/* ========================================
+   11. 小型スマートフォン
+======================================== */
+
+@media screen and (max-width: 480px) {
+
+  .site-header {
+    padding: 15px 14px;
+  }
+
+  .site-title {
+    font-size: 17px;
+  }
+
+  .dads-horizontal-menu {
+    font-size: 14px;
+  }
+
+}
+
+
+/* ========================================
+   12. 動きを減らす設定
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .dads-horizontal-menu__item-inner,
+  .dads-horizontal-menu__chevron {
+    transition: none;
+  }
+
+}
