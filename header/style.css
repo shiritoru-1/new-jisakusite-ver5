@@ -1,19 +1,32 @@
 
 /* ========================================
    01. カラーパレット
+   デジタル庁デザインシステム準拠
 ======================================== */
 
-:root {
+:host {
   --header-bg: #ffffff;
-  --header-text: #222222;
-  --header-subtext: #555555;
+  --header-text: #666666;
+  --header-subtext: #1a1a1a;
+  --header-border: #949494;
 
-  --header-border: #dcdcdc;
+  --color-neutral-white: #ffffff;
+  --color-neutral-black: #000000;
 
-  --header-hover: #f2f2f2;
-  --header-active: #eeeeee;
+  --color-neutral-solid-gray-50: #f2f2f2;
+  --color-neutral-solid-gray-420: #949494;
+  --color-neutral-solid-gray-900: #1a1a1a;
 
-  --header-accent: #222222;
+  --color-key-900: #0017c1;
+  --color-key-1000: #00118f;
+
+  --color-primitive-yellow-300: #ffd43d;
+
+  --font-family-sans:
+    "Noto Sans JP",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 
 
@@ -23,7 +36,7 @@
 
 .site-header {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
 
   width: 100%;
@@ -32,10 +45,10 @@
   padding: 0 36px;
   box-sizing: border-box;
 
-  background: var(--header-bg);
+  background: #ffffff !important;
+  color: var(--header-subtext);
 
-  /* ヘッダー下部の横線 */
-  border-bottom: 1px solid var(--header-border);
+  font-family: var(--font-family-sans);
 }
 
 
@@ -46,6 +59,9 @@
 .site-brand {
   display: inline-flex;
   align-items: center;
+  align-self: center;
+
+  flex-shrink: 0;
 
   color: inherit;
   text-decoration: none;
@@ -55,10 +71,10 @@
   margin: 0;
   padding: 0;
 
-  color: var(--header-text);
+  color: #1a1a1a;
 
-  font-size: 21px;
-  font-weight: 700;
+  font-size: 19px;
+  font-weight: 500;
   line-height: 1.5;
   letter-spacing: 0.025em;
 
@@ -68,30 +84,33 @@
 
 /* ========================================
    04. ナビゲーション全体
+   デジタル庁デザインシステム準拠
 ======================================== */
 
 .site-navigation {
   display: flex;
-  align-items: center;
+  align-items: stretch;
+
+  min-width: 0;
 }
 
 .dads-horizontal-menu {
   display: flex;
   align-items: stretch;
-  gap: 4px;
 
   margin: 0;
   padding: 0;
 
-  border: none;
-  list-style: none;
+  border-bottom: 1px solid var(--color-neutral-solid-gray-420);
 
-  color: var(--header-subtext);
+  color: var(--color-neutral-solid-gray-900);
+  list-style-type: none;
 
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.5;
+  font-family: var(--font-family-sans);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0;
 }
 
 
@@ -100,10 +119,10 @@
 ======================================== */
 
 .dads-horizontal-menu__item {
-  position: relative;
-
   display: flex;
-  align-items: center;
+  align-items: stretch;
+
+  position: relative;
 }
 
 
@@ -115,26 +134,26 @@
 
   display: flex;
   align-items: center;
-  justify-content: center;
 
-  min-height: 48px;
-  padding: 0 19px;
+  gap: 4px;
 
   box-sizing: border-box;
 
-  border-radius: 5px;
+  min-height: 64px;
 
-  background: transparent;
-  color: var(--header-subtext);
+  border: 0;
+  border-radius: 0;
+
+  background-color: transparent;
+
+  padding: 16px 20px;
+
+  color: inherit;
 
   font: inherit;
   text-decoration: none;
 
   cursor: pointer;
-
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
 }
 
 
@@ -145,18 +164,17 @@
 @media (hover: hover) {
 
   .dads-horizontal-menu__item-inner:hover {
-    background: var(--header-hover);
-    color: var(--header-text);
+    background-color: var(--color-neutral-solid-gray-50);
   }
 
   .dads-horizontal-menu__item-inner:hover::after {
     position: absolute;
 
-    right: 18px;
-    bottom: 4px;
-    left: 18px;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
-    border-bottom: 2px solid var(--header-accent);
+    border-bottom: 2px solid var(--color-neutral-black);
 
     content: "";
   }
@@ -169,10 +187,8 @@
 ======================================== */
 
 .dads-horizontal-menu__item-inner[aria-current="page"] {
-  background: var(--header-active);
-  color: #111111;
-
-  font-weight: 700;
+  background-color: var(--color-neutral-white);
+  color: var(--color-key-1000);
 }
 
 
@@ -181,14 +197,28 @@
 .dads-horizontal-menu__item-inner[aria-current="page"]::after {
   position: absolute;
 
-  right: 18px;
-  bottom: 4px;
-  left: 18px;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
-  border-bottom: 3px solid var(--header-accent);
-  border-radius: 3px;
+  border-bottom: 4px solid var(--color-key-900);
 
   content: "";
+}
+
+
+/* 選択中のメニューをホバーした場合 */
+
+@media (hover: hover) {
+
+  .dads-horizontal-menu__item-inner[aria-current="page"]:hover {
+    color: var(--color-key-900);
+
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
 }
 
 
@@ -197,10 +227,21 @@
 ======================================== */
 
 .dads-horizontal-menu__item-inner:focus-visible {
-  outline: 3px solid #222222;
-  outline-offset: 3px;
+  outline: 4px solid var(--color-neutral-black);
+  outline-offset: 2px;
 
-  background: #eeeeee;
+  border-radius: 4px;
+
+  background-color: var(--color-primitive-yellow-300);
+
+  box-shadow: 0 0 0 2px var(--color-primitive-yellow-300);
+}
+
+
+/* 選択中のメニューのフォーカス */
+
+.dads-horizontal-menu__item-inner[aria-current="page"]:focus-visible {
+  background-color: var(--color-neutral-white);
 }
 
 
@@ -211,11 +252,15 @@
 .dads-horizontal-menu__front-icon {
   flex-shrink: 0;
 
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
 .dads-horizontal-menu__chevron {
+  margin-top: 4px;
+
+  box-sizing: content-box;
+
   flex-shrink: 0;
 
   width: 16px;
@@ -223,6 +268,9 @@
 
   transition: transform 0.2s ease;
 }
+
+
+/* 展開時の矢印 */
 
 .dads-horizontal-menu__item-inner[aria-expanded="true"]
 .dads-horizontal-menu__chevron {
@@ -245,13 +293,14 @@
     padding: 18px 20px;
   }
 
-  .site-title {
-    font-size: 19px;
+  .site-brand {
+    align-self: auto;
   }
 
   .site-navigation {
     width: 100%;
     overflow-x: auto;
+    overflow-y: hidden;
   }
 
   .dads-horizontal-menu {
@@ -261,9 +310,6 @@
 
   .dads-horizontal-menu__item-inner,
   .dads-horizontal-menu__item-inner:any-link {
-    min-height: 46px;
-    padding: 0 15px;
-
     white-space: nowrap;
   }
 
@@ -297,9 +343,40 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-  .dads-horizontal-menu__item-inner,
   .dads-horizontal-menu__chevron {
     transition: none;
   }
 
+}
+
+
+/* ========================================
+   13. ページ本体からのスタイル分離
+======================================== */
+
+:host {
+  all: initial;
+
+  display: block;
+  width: 100%;
+
+  color: #222222;
+  background: #ffffff;
+
+  color-scheme: light;
+
+  font-family: var(--font-family-sans);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* ヘッダーの白色を固定 */
+
+.site-header {
+  background-color: #ffffff !important;
 }

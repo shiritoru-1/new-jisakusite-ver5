@@ -1,23 +1,229 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <!--x serverの無料のモリサワフォントの設定-->
-    <script type="text/javascript" src="//webfonts.xserver.jp/js/xserver.js"></script>
 <head>
-    <!-- 文字コード -->
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
 
-    <!-- レスポンシブ対応 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to my home page.</title>
 
-    <!-- ページ情報 -->
-    <title>しりとるのホームページ</title>
-    <meta name="description" content="ようこそ！しりとるのホームページへ！ネット民のようわからん個人サイトなのでゆっくりしていってね！！">
+  <style>
+    body {
+      margin: 0;
+      padding: 1.5rem;
+      background-color: #ffffff;
+      color: #111111;
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="/css/masume.css">
+      font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    .container {
+      text-align: left;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin: 0 0 0.5rem 0;
+    }
+
+    p {
+      color: #666666;
+      font-size: 0.875rem;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.6;
+    }
+
+    /* PC用入力欄 */
+
+    .command {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      font-size: 0.875rem;
+    }
+
+    .command span {
+      color: #666666;
+    }
+
+    .command input {
+      border: none;
+      outline: none;
+      background: transparent;
+
+      color: #111111;
+      font: inherit;
+
+      width: 100%;
+      padding: 4px 0;
+    }
+
+    .command input::placeholder {
+      color: #999999;
+    }
+
+    /* スマホ用ボタン */
+
+    .enter-button {
+      display: none;
+
+      padding: 0;
+      border: none;
+      background: none;
+
+      color: #111111;
+      font: inherit;
+      font-size: 0.875rem;
+
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      color: #888888;
+    }
+
+    /* タッチ端末 */
+
+    @media (hover: none) and (pointer: coarse) {
+      .command {
+        display: none;
+      }
+
+      .enter-button {
+        display: inline-block;
+      }
+    }
+
+    /* 物理キーボード使用時 */
+
+    body.keyboard-mode .command {
+      display: flex;
+    }
+
+    body.keyboard-mode .enter-button {
+      display: none;
+    }
+
+  </style>
 </head>
+
 <body>
-<h1>しりとるのホームページ</h1>
+
+  <div class="container">
+
+    <h1>Welcome to my home page.</h1>
+
+    <p>
+      ようこそ。<br>
+      Please enter to continue.
+    </p>
+
+    <!-- PC -->
+
+    <form class="command" id="entryForm">
+
+      <span>&gt;</span>
+
+      <input
+        type="text"
+        id="commandInput"
+        placeholder="enter"
+        autocomplete="off"
+        spellcheck="false"
+      >
+
+    </form>
+
+    <!-- Smartphone -->
+
+    <button
+      class="enter-button"
+      id="enterButton"
+      type="button"
+    >
+      &gt; Enter
+    </button>
+
+    <p class="message" id="message"></p>
+
+  </div>
+
+  <script>
+
+    const destination = "/home/";
+
+    const form = document.getElementById("entryForm");
+    const input = document.getElementById("commandInput");
+    const button = document.getElementById("enterButton");
+    const message = document.getElementById("message");
+
+    function enterSite() {
+      window.location.href = destination;
+    }
+
+    // PC command
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      if (input.value.trim().toLowerCase() === "enter") {
+        enterSite();
+      } else {
+        message.textContent = "Command not found.";
+      }
+    });
+
+    // Smartphone button
+    button.addEventListener("click", enterSite);
+
+    // Physical keyboard detection
+    document.addEventListener("keydown", function(e) {
+
+      const touchDevice = window.matchMedia(
+        "(hover: none) and (pointer: coarse)"
+      ).matches;
+
+      const typing =
+        e.key.length === 1 &&
+        !e.ctrlKey &&
+        !e.metaKey &&
+        !e.altKey;
+
+      if (
+        touchDevice &&
+        typing &&
+        document.activeElement !== input
+      ) {
+        document.body.classList.add("keyboard-mode");
+
+        input.focus();
+        input.value += e.key;
+
+        e.preventDefault();
+      }
+
+    });
+
+  </script>
+
 </body>
 </html>
